@@ -1,0 +1,108 @@
+package com.project.projectdemo.ui.auth.ui.fragment
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.project.projectdemo.R
+import com.project.projectdemo.data.localdatabase.AppDatabase
+import com.project.projectdemo.data.preferences.PreferenceProvider
+import com.project.projectdemo.data.repositories.UserRepository
+import com.project.projectdemo.databinding.LoginFragmentBinding
+import com.project.projectdemo.databinding.RegisterFragmentBinding
+import com.project.projectdemo.ui.auth.LoginActivity
+import com.project.projectdemo.ui.auth.ViewModelAuth
+import com.project.projectdemo.ui.auth.ViewModelFactoryAuth
+import com.project.projectdemo.ui.home.HomePageActivity
+import com.project.projectdemo.util.toast
+import com.project.projectdemo.util.toastFragment
+import kotlinx.coroutines.launch
+
+class RegisterFragment : Fragment() {
+    lateinit var binding: RegisterFragmentBinding
+    lateinit var prefs: PreferenceProvider
+    private lateinit var callbackFragment: CallbackFragment
+    private lateinit var viewModel: ViewModelAuth
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.register_fragment,container,false)
+        prefs = context?.let { PreferenceProvider(it) }!!
+        val dao = AppDatabase.getInstance(context)!!.getUserDao()
+        val repository = UserRepository(dao,prefs)
+        val factoryAuth = ViewModelFactoryAuth(repository)
+        viewModel = ViewModelProvider(this, factoryAuth).get(ViewModelAuth::class.java)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        return binding.root
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val buttonSignUp: Button = requireView().findViewById(R.id.signUpBtn)
+        val rbMale: RadioButton = requireView().findViewById(R.id.radioButton1)
+        val rbFemale: RadioButton = requireView().findViewById(R.id.radioButton2)
+        val signInText: TextView = requireView().findViewById(R.id.tvSignIn)
+        buttonSignUp.setOnClickListener {
+            onClickSignUp(it)
+        }
+
+        signInText.setOnClickListener {
+            onClickSignIn(it)
+        }
+
+        rbMale.setOnClickListener {
+            onClickListener(it)
+        }
+        rbFemale.setOnClickListener {
+            onClickListener(it)
+        }
+    }
+
+    fun setCallbackFragment(callbackFragment: CallbackFragment){
+        this.callbackFragment = callbackFragment
+    }
+    fun onClickListener(view: View) {
+        val rbg = getView()?.findViewById<RadioGroup>(R.id.radioGroup1)
+        val selected = rbg?.checkedRadioButtonId
+        val gender: RadioButton = selected?.let { getView()?.findViewById<View>(it) } as RadioButton
+        viewModel.radioChecked = gender.text.toString()
+    }
+
+    fun onClickSignUp(view: View){
+        viewModel.viewModelScope.launch {
+            if (viewModel.onClickRegister()&& viewModel.isFormValid) {
+                prefs.saveUserEmail(viewModel.returnUsername())
+                switchToHomepage()
+            } else if(viewModel.isFormValid){
+                toastFragment(context,"Account with this email already exists")
+            }
+            else{
+                toastFragment(context,"Please fill all details!")
+            }
+        }
+    }
+
+    fun onClickSignIn(view: View){
+       callbackFragment.changeFragmentSignUpToLogin()
+    }
+    fun switchToHomepage(){
+        val intent = Intent(context, HomePageActivity::class.java)
+        intent.putExtra("User email", prefs.getUserEmail())
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+    }
+}

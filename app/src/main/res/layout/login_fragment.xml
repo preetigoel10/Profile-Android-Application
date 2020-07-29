@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.project.projectdemo.ui.auth.ViewModelAuth" />
+    </data>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.ui.fragment.LoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/img"
+            android:layout_marginTop="40dp">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_baseline_face_24" />
+        </LinearLayout>
+
+        <EditText
+            android:text="@={viewModel.userEmail}"
+            android:id="@+id/editEmailAddress"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="35dp"
+            android:paddingLeft="15dp"
+            android:hint="Email"
+            android:layout_gravity="center"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/colorFullWhite"
+            android:background="@drawable/btn"
+            android:elevation="5dp"/>
+
+
+
+        <EditText
+            android:text="@={viewModel.userPassword}"
+            android:id="@+id/editEmailPassword"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:background="@drawable/btn"
+            android:paddingStart="15dp" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:text="SIGN IN"
+            android:onClick="onClickLogin"
+            android:layout_gravity="center"
+            android:elevation="5dp"
+            android:background="@drawable/sign_up_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite" />
+        <TextView
+            android:id="@+id/textSignUp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="New here? Create an account!"
+            android:clickable="true"
+            android:onClick="onClickSignUp"
+            android:textColor="@color/colorFullWhite"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+
+</FrameLayout>
+</layout>

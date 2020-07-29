@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="viewModel"
+        type="com.project.projectdemo.ui.auth.ViewModelAuth" />
+</data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightWhite"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.auth.SignUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Your\nAccount"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="35dp"
+            android:paddingLeft="15dp"
+            android:hint="Your Name"
+            android:text="@={viewModel.userName}"
+            android:inputType="textCapWords"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:background="@drawable/btn"/>
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:hint="Email"
+            android:text="@={viewModel.userEmail}"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:background="@drawable/btn"/>
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:hint="Password"
+            android:text="@={viewModel.userPassword}"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:background="@drawable/btn"/>
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Select Gender: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="15sp"
+                android:paddingStart="10dp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+
+                >
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="86dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickListener"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickListener"
+                    android:text="Female" />
+            </RadioGroup>
+        </LinearLayout>
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:hint="Age"
+            android:inputType="number"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:text="@={viewModel.userAge}"
+            android:background="@drawable/btn"/>
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:hint="City"
+            android:text="@={viewModel.userCity}"
+            android:inputType="textCapWords"
+            android:textColorHint="@color/colorFullWhite"
+            android:elevation="5dp"
+            android:background="@drawable/btn"/>
+        <Button
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:id="@+id/signUp"
+            android:text="SIGN UP"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:layout_marginTop="25dp"
+            android:onClick="onClickSignUp"
+            android:elevation="5dp"
+            android:background="@drawable/sign_up_btn"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Already a user? Sign in!"
+            android:clickable="true"
+            android:onClick="onClickSignIn"
+            android:textColor="@color/colorFullWhite"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>
+</layout>
