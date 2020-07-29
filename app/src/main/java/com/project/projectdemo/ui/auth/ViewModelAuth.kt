@@ -32,7 +32,7 @@ class ViewModelAuth(
     var isFormValid:Boolean = true
 
    suspend fun onClickRegister(): Boolean {
-       if(userName == null || userEmail == null || userPassword == null || userCity== null || radioChecked.isNullOrBlank() || userAge == null)
+       if(userName == null || userEmail == null || userPassword == null || userCity== null || radioChecked.isNullOrBlank() || userAge == null || userAge.value == "")
        {
            isFormValid = false
        }
