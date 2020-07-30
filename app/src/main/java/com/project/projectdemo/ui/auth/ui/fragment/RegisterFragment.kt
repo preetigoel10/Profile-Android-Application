@@ -30,8 +30,8 @@ import kotlinx.coroutines.launch
 class RegisterFragment : Fragment() {
     lateinit var binding: RegisterFragmentBinding
     lateinit var prefs: PreferenceProvider
-//    private lateinit var callbackFragment: CallbackFragment
     private lateinit var viewModel: ViewModelAuth
+    //private lateinit var callbackFragment: CallbackFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
