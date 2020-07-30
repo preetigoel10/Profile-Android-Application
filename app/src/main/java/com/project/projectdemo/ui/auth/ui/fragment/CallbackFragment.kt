@@ -1,6 +1,6 @@
 package com.project.projectdemo.ui.auth.ui.fragment
 
-interface CallbackFragment {
-    fun changeFragmentLoginToSignUp()
-    fun changeFragmentSignUpToLogin()
-}
+//interface CallbackFragment {
+//    fun changeFragmentLoginToSignUp()
+//    fun changeFragmentSignUpToLogin()
+//}

@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
     lateinit var binding: LoginFragmentBinding
     lateinit var viewModel: ViewModelAuth
     lateinit var prefs: PreferenceProvider
-    private lateinit var callbackFragment: CallbackFragment
+//    private lateinit var callbackFragment: CallbackFragment
 
 
     override fun onCreateView(
