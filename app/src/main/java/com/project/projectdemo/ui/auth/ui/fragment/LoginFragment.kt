@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.project.projectdemo.R
 import com.project.projectdemo.data.localdatabase.AppDatabase
 import com.project.projectdemo.data.preferences.PreferenceProvider
@@ -49,21 +51,25 @@ class LoginFragment : Fragment() {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-         val buttonLogin: Button = requireView().findViewById(R.id.buttonLogin)
-         val signUpText: TextView = requireView().findViewById(R.id.textSignUp)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val signUpText: TextView = view.findViewById(R.id.textSignUp)
+        val buttonLogin: Button = view.findViewById(R.id.buttonLogin)
+        val navController: NavController = Navigation.findNavController(view)
+
+        signUpText.setOnClickListener{
+
+            onClickSignUp(navController)
+        }
         buttonLogin.setOnClickListener {
-            onClickLogin(it)
+            onClickLogin()
         }
 
-        signUpText.setOnClickListener {
-            onClickSignUp(it)
-        }
     }
-
-
-    fun onClickLogin(view: View)
+    fun onClickSignUp(navController:NavController){
+        navController.navigate(R.id.action_loginFragment_to_registerFragment)
+    }
+    fun onClickLogin()
     {
         viewModel.viewModelScope.launch {
             if (viewModel.authenticateUser()) {
@@ -75,14 +81,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    fun onClickSignUp(view: View){
-        if(callbackFragment!= null){
-            callbackFragment.changeFragmentLoginToSignUp()
-        }
-    }
-    fun setCallbackFragment(callbackFragment: CallbackFragment){
-        this.callbackFragment = callbackFragment
-    }
+
     fun switchToHomepage(){
         val intent = Intent(context, HomePageActivity::class.java)
         intent.putExtra("User email", prefs.getUserEmail() )
@@ -91,3 +90,15 @@ class LoginFragment : Fragment() {
     }
 
 }
+
+
+
+//    fun onClickSignUp(view: View){
+//        if(callbackFragment!= null){
+//            callbackFragment.changeFragmentLoginToSignUp()
+//        }
+//
+//    }
+//    fun setCallbackFragment(callbackFragment: CallbackFragment){
+//        this.callbackFragment = callbackFragment
+//    }

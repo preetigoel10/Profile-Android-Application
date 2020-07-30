@@ -10,9 +10,16 @@
     android:padding="10dp"
     tools:context=".ui.auth.ui.fragment.LoginSignupActivity">
 
-    <FrameLayout
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/fragmentContainer"/>-->
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragmentContainer"/>
-
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_component" />
 </LinearLayout>
