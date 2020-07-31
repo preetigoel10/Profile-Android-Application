@@ -19,7 +19,6 @@ class LoginSignupActivity : AppCompatActivity() {
             switchToHomepage()
         }
         setContentView(R.layout.activity_login_signup)
-//        addFragment()
     }
 
     private fun switchToHomepage() {
@@ -31,13 +30,6 @@ class LoginSignupActivity : AppCompatActivity() {
 }
 
 
-//    override fun changeFragmentLoginToSignUp() {
-//        replaceFragmentLoginToSignUp()
-//    }
-
-//    override fun changeFragmentSignUpToLogin() {
-//        replaceFragmentSignUpToLogin()
-//    }
 
 
 //     private fun addFragment() {

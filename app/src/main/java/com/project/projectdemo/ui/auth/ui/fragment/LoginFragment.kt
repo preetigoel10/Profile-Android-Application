@@ -30,8 +30,6 @@ class LoginFragment : Fragment() {
     lateinit var binding: LoginFragmentBinding
     lateinit var viewModel: ViewModelAuth
     lateinit var prefs: PreferenceProvider
-//    private lateinit var callbackFragment: CallbackFragment
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,13 +90,3 @@ class LoginFragment : Fragment() {
 }
 
 
-
-//    fun onClickSignUp(view: View){
-//        if(callbackFragment!= null){
-//            callbackFragment.changeFragmentLoginToSignUp()
-//        }
-//
-//    }
-//    fun setCallbackFragment(callbackFragment: CallbackFragment){
-//        this.callbackFragment = callbackFragment
-//    }

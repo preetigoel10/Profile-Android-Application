@@ -31,7 +31,6 @@ class RegisterFragment : Fragment() {
     lateinit var binding: RegisterFragmentBinding
     lateinit var prefs: PreferenceProvider
     private lateinit var viewModel: ViewModelAuth
-    //private lateinit var callbackFragment: CallbackFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,10 +63,10 @@ class RegisterFragment : Fragment() {
             onClickSignIn(navController)
         }
         rbMale.setOnClickListener {
-            onClickListener()
+            onClickListener(it)
         }
         rbFemale.setOnClickListener {
-            onClickListener()
+            onClickListener(it)
         }
     }
 
@@ -76,11 +75,10 @@ class RegisterFragment : Fragment() {
         navController.navigate(R.id.action_registerFragment_to_loginFragment,null,navOptions)
     }
 
-
-    fun onClickListener() {
-        val rbg = getView()?.findViewById<RadioGroup>(R.id.radioGroup1)
-        val selected = rbg?.checkedRadioButtonId
-        val gender: RadioButton = selected?.let { getView()?.findViewById<View>(it) } as RadioButton
+    fun onClickListener(view:View) {
+        val rbg = view.findViewById<RadioGroup>(R.id.radioGroup1)
+        val selected = rbg.checkedRadioButtonId
+        val gender: RadioButton = view.findViewById<View>(selected) as RadioButton
         viewModel.radioChecked = gender.text.toString()
     }
 
@@ -106,12 +104,3 @@ class RegisterFragment : Fragment() {
 }
 
 
-//    fun onClickSignIn(view: View){
-//       callbackFragment.changeFragmentSignUpToLogin()
-//    }
-
-
-//
-//    fun setCallbackFragment(callbackFragment: CallbackFragment) {
-//        this.callbackFragment = callbackFragment
-//    }
