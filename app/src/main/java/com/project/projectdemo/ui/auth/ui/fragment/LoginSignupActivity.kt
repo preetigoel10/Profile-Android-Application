@@ -32,6 +32,13 @@ class LoginSignupActivity : AppCompatActivity() {
 
 
 
+
+
+
+
+
+
+
 //     private fun addFragment() {
 //         fragment = LoginFragment()
 //         (fragment as LoginFragment).setCallbackFragment(this)
